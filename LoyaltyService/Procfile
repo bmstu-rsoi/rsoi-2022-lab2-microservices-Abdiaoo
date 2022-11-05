@@ -1,0 +1,1 @@
+web: gunicorn LoyaltyService.wsgi --log-file -
