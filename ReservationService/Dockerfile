@@ -11,4 +11,4 @@ RUN pip install -r requirements.txt
 
 COPY . /app/ReservationService
 
-CMD python manage.py runserver 0.0.0.0:8070
+CMD ["python3", "ReservationService/manage.py","runserver", "0.0.0.0:8070"]

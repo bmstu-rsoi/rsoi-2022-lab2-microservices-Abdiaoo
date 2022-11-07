@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-#$=&b#@+t9l6$z#ru)1e$uxafg#+=4jsa3=*1a=@l+$gig8iaz
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -77,11 +77,8 @@ WSGI_APPLICATION = 'LoyaltyService.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME':'postgres',
-        'USER':'postgres',
-        'HOST':'postgres',
-        'PORT': 5432
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 

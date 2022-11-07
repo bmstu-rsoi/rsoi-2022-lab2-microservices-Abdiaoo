@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-07_1u0k018_f@=@&&4e756^2su&(-_qe889d_j6kzzvkfrd4!_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -77,11 +77,8 @@ WSGI_APPLICATION = 'PaymentService.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME':'postgres',
-        'USER':'postgres',
-        'HOST':'postgres',
-        'PORT': 5432
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 

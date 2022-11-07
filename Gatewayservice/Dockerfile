@@ -1,14 +1,14 @@
 FROM python:3.9
 
+
 ENV PYTHONUNBUFFERED 1
 
-WORKDIR /app/GatewayService
+WORKDIR /app/Gatewayservice
 
-COPY requirements.txt /app/GatewayService/requirements.txt
+COPY requirements.txt /app/Gatewayservice/requirements.txt
 
 RUN pip install -r requirements.txt
 
-COPY . /app/GatewayService/
+COPY . /app/Gatewayservice
 
-CMD ["python3", "manage.py","runserver", "0.0.0.0:8050"]
-
+CMD ["python3", "Gatewayservice/manage.py","runserver", "0.0.0.0:8080"]
