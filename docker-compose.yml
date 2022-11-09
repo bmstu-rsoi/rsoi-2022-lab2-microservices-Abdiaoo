@@ -16,6 +16,10 @@ services:
   loyaltyservice:
     container_name: loyaltyservice
     image: loyaltyservice
+    command: >
+      sh -c "python manage.py collectstatic --noinput &&
+             python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8050"
     restart: always
     build:
       context: ./LoyaltyService
@@ -26,6 +30,10 @@ services:
   reservationservice:
     container_name: reservationservice
     image: reservationservice
+    command: >
+      sh -c "python manage.py collectstatic --noinput &&
+             python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8070"
     restart: always
     build:
       context: ./ReservationService
@@ -36,6 +44,10 @@ services:
   paymentservice:
     container_name: paymentservice
     image: paymentservice
+    command: >
+      sh -c "python manage.py collectstatic --noinput &&
+             python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8060"
     restart: always
     build:
       context: ./PaymentService
@@ -46,6 +58,10 @@ services:
   gatewayservice:
     container_name: gatewayservice
     image: gatewayservice
+    command: >
+      sh -c "python manage.py collectstatic --noinput &&
+             python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8080"
     restart: always
     build:
       context: ./Gatewayservice
