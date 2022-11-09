@@ -15,6 +15,7 @@ services:
       - "5432:5432"
   loyaltyservice:
     container_name: loyaltyservice
+    image: loyaltyservice
     restart: always
     build:
       context: ./LoyaltyService
@@ -24,6 +25,7 @@ services:
       - .:/app/LoyaltyService
   reservationservice:
     container_name: reservationservice
+    image: reservationservice
     restart: always
     build:
       context: ./ReservationService
@@ -33,6 +35,7 @@ services:
       - .:/app/ReservationService
   paymentservice:
     container_name: paymentservice
+    image: paymentservice
     restart: always
     build:
       context: ./PaymentService
@@ -42,6 +45,7 @@ services:
       - .:/app/PaymentService
   gatewayservice:
     container_name: gatewayservice
+    image: gatewayservice
     restart: always
     build:
       context: ./Gatewayservice
