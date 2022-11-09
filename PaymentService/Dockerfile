@@ -8,4 +8,3 @@ RUN pip install -r requirements.txt
 
 COPY . /app/PaymentService
 
-CMD ["python3", "PaymentService/manage.py","runserver", "0.0.0.0:8060"]
