@@ -10,5 +10,3 @@ COPY requirements.txt /app/ReservationService/requirements.txt
 RUN pip install -r requirements.txt
 
 COPY . /app/ReservationService
-
-CMD ["python3", "ReservationService/manage.py","runserver", "0.0.0.0:8070"]
