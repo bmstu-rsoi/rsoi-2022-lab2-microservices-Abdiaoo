@@ -15,7 +15,7 @@ class GatewayViewSet(viewsets.ViewSet):
     
     def list_loyalty(self,request):
         username=request.headers['X-User-Name']
-        loyalties=requests.get('http://loyaltyservice:8050/api/v1/loyalty')
+        loyalties=requests.get('http://localhost:8050/api/v1/loyalty')
         print(loyalties.status_code)
         for loyalty in loyalties.json():
             if loyalty['username']==username:
