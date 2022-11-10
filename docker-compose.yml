@@ -40,7 +40,7 @@ services:
       - 8060:8060
     volumes:
       - .:/app/PaymentService
-    network_brige: bridge
+    network_mode: bridge
   gatewayservice:
     container_name: gatewayservice
     image: gatewayservice
