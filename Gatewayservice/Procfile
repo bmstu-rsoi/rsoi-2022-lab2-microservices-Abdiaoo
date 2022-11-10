@@ -1,1 +1,0 @@
-web: gunicorn Gateway_Service.wsgi --log-file -

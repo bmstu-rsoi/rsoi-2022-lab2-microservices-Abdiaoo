@@ -8,4 +8,5 @@ RUN pip install -r requirements.txt
 
 COPY . /app/PaymentService
 
-CMD ["python3", "PaymentService/manage.py","runserver", "0.0.0.0:8060"]
+CMD ["sh", "-c", " /usr/local/bin/python PaymentService/manage.py makemigrations && /usr/local/bin/python PaymentService/manage.py migrate && /usr/local/bin/python PaymentService/manage.py runserver 0.0.0.0:8060"]
+
