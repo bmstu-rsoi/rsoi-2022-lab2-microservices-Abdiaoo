@@ -33,6 +33,14 @@ jobs:
           ./scripts/wait-script.sh
         env:
           WAIT_PORTS: 8080,8070,8060,8050,5432
+      - name: running containers
+        run: |
+          docker ps
+          docker port reservationservice
+          docker port loyaltyservice
+          docker port gatewayservice
+          docker port paymentservice
+          docker port postgres 
       - name: Run API Tests
         uses: matt-ball/newman-action@master
         with:
