@@ -40,7 +40,11 @@ jobs:
           docker port loyaltyservice
           docker port gatewayservice
           docker port paymentservice
-          docker port postgres 
+          docker port postgres
+      - name: volumes
+        run: |
+          docker volume ls
+          
       - name: ips
         run: docker inspect -f '{{.Name}} - {{.NetworkSettings.IPAddress }}' $(docker ps -aq)
       - name: Run API Tests
