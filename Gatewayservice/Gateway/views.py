@@ -16,7 +16,7 @@ class GatewayViewSet(viewsets.ViewSet):
     def list_loyalty(self,request):
         username=request.headers['X-User-Name']
         loyalties=requests.get('http://loyaltyservice:8050/api/v1/loyalty')
-        time.sleep(5)
+        print(loyalties.status_code)
         for loyalty in loyalties.json():
             if loyalty['username']==username:
                 userLoyalty=loyalty
@@ -47,7 +47,6 @@ class GatewayViewSet(viewsets.ViewSet):
             price=hotel['price']*days.days
             cost=price-(price*userLoyalty['discount']/100)
             payment=requests.post('http://paymentservice:8060/api/v1/Payment',json={'status':'PAID','price':cost})
-            time.sleep(5)
             numberReservation=userLoyalty['reservationCount']+1
             status_loyalty="BRONZE"
             if(numberReservation>=10):
@@ -55,10 +54,8 @@ class GatewayViewSet(viewsets.ViewSet):
             if(numberReservation>=20):
                 status_loyalty="GOLD"
             updateloyalty=requests.patch('http://loyaltyservice:8050/api/v1/loyalty/{}'.format(userLoyalty['id']),data={'status':status_loyalty,'reservationCount':numberReservation})
-            time.sleep(5)
             data={'username':userLoyalty['username'],'paymentUid':payment.json()['paymentUid'],'hotel_id':choosedHotel['id'],'status':'PAID','startDate':request.data['startDate'],'endDate':request.data['endDate']}
             reservation=requests.post('http://reservationservice:8070/api/v1/reservations',data=data)
-            time.sleep(5)
             data={'reservationUid':reservation.json()['reservationUid'],'hotelUid':choosedHotel['hotelUid'],'startDate':reservation.json()['startDate'],'endDate':reservation.json()['endDate'],'discount':userLoyalty['discount'],'status':reservation.json()['status'],'payment':payment.json()}
             return JsonResponse(data,status=status.HTTP_200_OK,safe=False,json_dumps_params={'ensure_ascii': False})
         except Exception as e:
@@ -75,13 +72,10 @@ class GatewayViewSet(viewsets.ViewSet):
                     userLoyalty=loyalty
                     break
             reservations=requests.get('http://reservationservice:8070/api/v1/reservations')
-            time.sleep(5)
             userReservations=[reservation for reservation in reservations.json() if reservation['username']==username]
             
             hotels=requests.get('http://reservationservice:8070/api/v1/hotels')
-            time.sleep(5)
             payments=requests.get('http://paymentservice:8060/api/v1/Payment')
-            time.sleep(5)
             infosUser=[]
             for reservation in userReservations:
                 for hotel in hotels.json():
@@ -113,6 +107,7 @@ class GatewayViewSet(viewsets.ViewSet):
     def hotels(self,request):
         
         hotels=requests.get('http://reservationservice:8070/api/v1/hotels')
+        print(hotels.status_code)
         paginator = Paginator(hotels.json(), request.GET.get('size'))
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
