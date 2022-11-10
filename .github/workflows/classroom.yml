@@ -45,6 +45,8 @@ jobs:
         run: docker volume ls
       - name: db-data
         run: docker volume inspect rsoi-2022-lab2-microservices-abdiaoo_db-data
+      - name: networks
+        run: docker network ls
       - name: ips
         run: docker inspect -f '{{.Name}} - {{.NetworkSettings.IPAddress }}' $(docker ps -aq)
       - name: Run API Tests
