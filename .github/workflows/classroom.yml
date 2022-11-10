@@ -41,6 +41,7 @@ jobs:
           docker port gatewayservice
           docker port paymentservice
           docker port postgres 
+          docker volume inspect db-data
       - name: ips
         run: docker inspect -f '{{.Name}} - {{.NetworkSettings.IPAddress }}' $(docker ps -aq)
       - name: Run API Tests
