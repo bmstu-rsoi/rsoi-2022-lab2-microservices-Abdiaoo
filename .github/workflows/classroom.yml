@@ -33,13 +33,6 @@ jobs:
           ./scripts/wait-script.sh
         env:
           WAIT_PORTS: 8080,8070,8060,8050,5432
-
-      - name: Fill database
-        run: |
-          cd src
-          chmod +x fill_db.sh
-          ./fill_db.sh
-
       - name: Run API Tests
         uses: matt-ball/newman-action@master
         with:
