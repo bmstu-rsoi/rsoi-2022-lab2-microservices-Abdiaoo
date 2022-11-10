@@ -18,6 +18,10 @@ services:
     container_name: loyaltyservice
     image: loyaltyservice
     restart: always
+    command: >
+      sh -c "python manage.py collectstatic --noinput &&
+             python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8050"
     ports:
       - 8050:8050
     volumes:
@@ -26,6 +30,10 @@ services:
     container_name: reservationservice
     image: reservationservice
     restart: always
+    command: >
+      sh -c "python manage.py collectstatic --noinput &&
+             python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8070"
     ports:
       - 8070:8070
     volumes:
@@ -34,6 +42,10 @@ services:
     container_name: paymentservice
     image: paymentservice
     restart: always
+    command: >
+      sh -c "python manage.py collectstatic --noinput &&
+             python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8060"
     ports:
       - 8060:8060
     volumes:
