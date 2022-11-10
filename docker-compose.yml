@@ -16,13 +16,7 @@ services:
   loyaltyservice:
     container_name: loyaltyservice
     image: loyaltyservice
-    command: >
-      sh -c "python manage.py collectstatic --noinput &&
-             python manage.py migrate &&
-             python manage.py runserver 0.0.0.0:8050"
     restart: always
-    build:
-      context: ./LoyaltyService
     ports:
       - 8050:8050
     volumes:
@@ -30,13 +24,7 @@ services:
   reservationservice:
     container_name: reservationservice
     image: reservationservice
-    command: >
-      sh -c "python manage.py collectstatic --noinput &&
-             python manage.py migrate &&
-             python manage.py runserver 0.0.0.0:8070"
     restart: always
-    build:
-      context: ./ReservationService
     ports:
       - 8070:8070
     volumes:
@@ -44,13 +32,7 @@ services:
   paymentservice:
     container_name: paymentservice
     image: paymentservice
-    command: >
-      sh -c "python manage.py collectstatic --noinput &&
-             python manage.py migrate &&
-             python manage.py runserver 0.0.0.0:8060"
     restart: always
-    build:
-      context: ./PaymentService
     ports:
       - 8060:8060
     volumes:
@@ -59,8 +41,6 @@ services:
     container_name: gatewayservice
     image: gatewayservice
     restart: always
-    build:
-      context: ./Gatewayservice
     ports:
       - 8080:8080
     volumes:
