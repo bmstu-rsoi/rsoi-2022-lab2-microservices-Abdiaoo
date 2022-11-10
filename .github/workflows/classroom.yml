@@ -25,7 +25,7 @@ jobs:
           docker compose up -d
           ./scripts/wait-script.sh
         env:
-          WAIT_PORTS: 8080,8070,8060,8050
+          WAIT_PORTS: 8080,8070,8060,8050,5432
       - name: Running containers
         run: docker ps
       - name: Run API Tests
