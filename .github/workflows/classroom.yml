@@ -42,9 +42,9 @@ jobs:
           docker port paymentservice
           docker port postgres
       - name: volumes
-        run: |
-          docker volume ls
-          
+        run: docker volume ls
+      - name: db-data
+        run: docker volume inspect rsoi-2022-lab2-microservices-abdiaoo_db-data
       - name: ips
         run: docker inspect -f '{{.Name}} - {{.NetworkSettings.IPAddress }}' $(docker ps -aq)
       - name: Run API Tests
