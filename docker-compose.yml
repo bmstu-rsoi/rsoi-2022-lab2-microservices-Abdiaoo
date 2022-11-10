@@ -21,6 +21,7 @@ services:
       - 8050:8050
     volumes:
       - .:/app/LoyaltyService
+    network_mode: bridge
   reservationservice:
     container_name: reservationservice
     image: reservationservice
@@ -29,6 +30,7 @@ services:
       - 8070:8070
     volumes:
       - .:/app/ReservationService
+    network_mode: bridge
   paymentservice:
     container_name: paymentservice
     image: paymentservice
@@ -37,6 +39,7 @@ services:
       - 8060:8060
     volumes:
       - .:/app/PaymentService
+    network_mode: bridge
   gatewayservice:
     container_name: gatewayservice
     image: gatewayservice
@@ -45,5 +48,6 @@ services:
       - 8080:8080
     volumes:
       - .:/app/Gatewayservice
+    network_mode: bridge
 volumes:
   db-data:
