@@ -41,6 +41,9 @@ jobs:
           docker port gatewayservice
           docker port paymentservice
           docker port postgres
+      - name: inspecting
+        run: |
+          docker inspect reservationservice
       - name: volumes
         run: docker volume ls
       - name: db-data
