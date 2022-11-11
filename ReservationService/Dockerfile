@@ -1,12 +1,12 @@
 FROM python:3.9
 ENV PYTHONUNBUFFERED 1
-WORKDIR /app/PaymentService
+WORKDIR /app/ReservationService
 
-COPY requirements.txt /app/PaymentService/requirements.txt
+COPY requirements.txt /app/ReservationService/requirements.txt
 
 RUN pip install -r requirements.txt
 
-COPY . /app/PaymentService
+COPY . /app/ReservationService
 
-CMD ["sh", "-c", " /usr/local/bin/python manage.py makemigrations && /usr/local/bin/python manage.py migrate && /usr/local/bin/python manage.py runserver 0.0.0.0:8060"]
+CMD ["sh", "-c", " /usr/local/bin/python manage.py makemigrations && /usr/local/bin/python manage.py migrate && /usr/local/bin/python manage.py runserver 0.0.0.0:8070"]
 
