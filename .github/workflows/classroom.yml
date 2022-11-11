@@ -33,6 +33,11 @@ jobs:
           ./scripts/wait-script.sh
         env:
           WAIT_PORTS: 8080,8070,8060,8050,5432
+      - name: logss
+        run:  |
+          docker container logs reservationservice
+          docker container logs loyaltyservice
+           docker container logs paymentservice 
       - name: Run API Tests
         uses: matt-ball/newman-action@master
         with:
