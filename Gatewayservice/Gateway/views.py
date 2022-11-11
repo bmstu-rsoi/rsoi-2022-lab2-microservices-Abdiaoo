@@ -14,18 +14,16 @@ import time
 class GatewayViewSet(viewsets.ViewSet):
     
     def list_loyalty(self,request):
-        username=request.headers['X-User-Name']
-        loyalties=requests.get('http://localhost:8050/api/v1/loyalty')
-        print(loyalties.status_code)
-        for loyalty in loyalties.json():
-            if loyalty['username']==username:
-                userLoyalty=loyalty
-                break
-        
-        if loyalties.status_code != 200:
-            return JsonResponse(status=status.HTTP_400_BAD_REQUEST)
-        return JsonResponse(userLoyalty,status=status.HTTP_200_OK,safe=False,json_dumps_params={'ensure_ascii': False})
-    
+        try:
+            username=request.headers['X-User-Name']
+            loyalties=requests.get('http://loyaltyservice:8050/api/v1/loyalty')
+            for loyalty in loyalties.json():
+                if loyalty['username']==username:
+                    userLoyalty=loyalty
+                    break
+            return JsonResponse(userLoyalty,status=status.HTTP_200_OK,safe=False,json_dumps_params={'ensure_ascii': False})
+        except Exception as e:
+            return JsonResponse({'message':'{}'.format(e),'status':loyalities.status_code},status=status.HTTP_400_BAD_REQUEST)
     def bookaHotel(self,request):
         try:
             username=request.headers['X-User-Name']
