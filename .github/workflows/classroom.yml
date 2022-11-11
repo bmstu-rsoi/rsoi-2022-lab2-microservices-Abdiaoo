@@ -44,6 +44,9 @@ jobs:
       - name: inspecting
         run: |
           docker inspect reservationservice
+      - name: autre
+        run: |
+          docker inspect gatewayservice
       - name: volumes
         run: docker volume ls
       - name: db-data
