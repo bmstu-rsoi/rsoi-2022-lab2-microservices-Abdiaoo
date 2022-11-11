@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'PaymentService.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'payments',
+        'NAME': 'paymentso',
         'USER':'program',
         'PASSWORD':'test',
         'HOST':'postgres',
