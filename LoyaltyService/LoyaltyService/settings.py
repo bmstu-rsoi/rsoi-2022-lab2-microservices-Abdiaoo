@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'LoyaltyService.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'loyaltiesty',
+        'NAME': 'loyalties',
         'USER':'program',
         'PASSWORD':'test',
         'HOST':'postgres',
