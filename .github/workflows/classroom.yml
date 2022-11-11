@@ -53,6 +53,11 @@ jobs:
           docker container logs gatewayservice
           docker port gatewayservice
           docker inspect gatewayservice
+      - name: logs pos
+        run: |
+          docker container logs postgres
+          docker port postgres
+          docker inspect postgres
       - name: Run API Tests
         uses: matt-ball/newman-action@master
         with:
