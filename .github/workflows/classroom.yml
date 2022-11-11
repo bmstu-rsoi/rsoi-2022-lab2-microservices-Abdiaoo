@@ -40,7 +40,18 @@ jobs:
           environment: v2/postman/environment.json
           delayRequest: 100
           reporters: '[ "cli" ]'
-
+      - name: inspect reservation
+        run: docker reservationservice
+      - name: log reservation
+        run: docker container logs reservationservice
+      - name: inspect payment
+        run: docker paymentservice
+      - name: log payment
+        run: docker container logs paymentservice
+      - name: inspect gateway
+        run: docker gatewayservice
+      - name: log gateway
+        run: docker container logs gatewayservice
       - uses: education/autograding@v1
         id: autograder
         continue-on-error: true
