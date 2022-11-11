@@ -33,28 +33,6 @@ jobs:
           ./scripts/wait-script.sh
         env:
           WAIT_PORTS: 8080,8070,8060,8050,5432
-      - name: running containers
-        run: |
-          docker ps
-          docker port reservationservice
-          docker port loyaltyservice
-          docker port gatewayservice
-          docker port paymentservice
-          docker port postgres
-      - name: inspecting
-        run: |
-          docker inspect reservationservice
-      - name: autre
-        run: |
-          docker inspect gatewayservice
-      - name: volumes
-        run: docker volume ls
-      - name: db-data
-        run: docker volume inspect rsoi-2022-lab2-microservices-abdiaoo_db-data
-      - name: networks
-        run: docker network ls
-      - name: ips
-        run: docker inspect -f '{{.Name}} - {{.NetworkSettings.IPAddress }}' $(docker ps -aq)
       - name: Run API Tests
         uses: matt-ball/newman-action@master
         with:
