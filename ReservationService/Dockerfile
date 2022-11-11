@@ -8,5 +8,5 @@ RUN pip install -r requirements.txt
 
 COPY . /app/ReservationService
 
-CMD ["sh", "-c", " /usr/local/bin/python manage.py makemigrations && /usr/local/bin/python manage.py migrate && /usr/local/bin/python manage.py runserver 0.0.0.0:8070"]
+CMD ["sh", "-c", " /usr/local/bin/python ReservationService/manage.py makemigrations && /usr/local/bin/python ReservationService/manage.py migrate && /usr/local/bin/python ReservationService/manage.py runserver 0.0.0.0:8070"]
 
