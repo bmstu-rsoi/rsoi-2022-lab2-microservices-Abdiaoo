@@ -15,7 +15,7 @@ class GatewayViewSet(viewsets.ViewSet):
     
     def list_loyalty(self,request):
         username=request.headers['X-User-Name']
-        loyalties=requests.get('http://localhost:8050/api/v1/loyalty')
+        loyalties=requests.get('http://loyaltyservice:8050/api/v1/loyalty')
         for loyalty in loyalties.json():
             if loyalty['username']==username:
                 userLoyalty=loyalty
@@ -27,13 +27,13 @@ class GatewayViewSet(viewsets.ViewSet):
     def bookaHotel(self,request):
         try:
             username=request.headers['X-User-Name']
-            hotels=requests.get('http://localhost:8070/api/v1/hotels')
+            hotels=requests.get('http://reservationservice:8070/api/v1/hotels')
             time.sleep(5)
             for hotel in hotels.json():
                 if hotel['hotelUid']==request.data['hotelUid']:
                     choosedHotel=hotel
                     break
-            loyalties=requests.get('http://localhost:8050/api/v1/loyalty')
+            loyalties=requests.get('http://loyaltyservice:8050/api/v1/loyalty')
             time.sleep(5)
             for loyalty in loyalties.json():
                 if loyalty['username']==username:
@@ -44,16 +44,16 @@ class GatewayViewSet(viewsets.ViewSet):
             days=d1-d2
             price=hotel['price']*days.days
             cost=price-(price*userLoyalty['discount']/100)
-            payment=requests.post('http://localhost:8060/api/v1/Payment',json={'status':'PAID','price':cost})
+            payment=requests.post('http://paymentservice:8060/api/v1/Payment',json={'status':'PAID','price':cost})
             numberReservation=userLoyalty['reservationCount']+1
             status_loyalty="BRONZE"
             if(numberReservation>=10):
                 status_loyalty="SILVER"
             if(numberReservation>=20):
                 status_loyalty="GOLD"
-            updateloyalty=requests.patch('http://localhost:8050/api/v1/loyalty/{}'.format(userLoyalty['id']),data={'status':status_loyalty,'reservationCount':numberReservation})
+            updateloyalty=requests.patch('http://loyaltyservice:8050/api/v1/loyalty/{}'.format(userLoyalty['id']),data={'status':status_loyalty,'reservationCount':numberReservation})
             data={'username':userLoyalty['username'],'paymentUid':payment.json()['paymentUid'],'hotel_id':choosedHotel['id'],'status':'PAID','startDate':request.data['startDate'],'endDate':request.data['endDate']}
-            reservation=requests.post('http://localhost:8070/api/v1/reservations',data=data)
+            reservation=requests.post('http://reservationservice:8070/api/v1/reservations',data=data)
             data={'reservationUid':reservation.json()['reservationUid'],'hotelUid':choosedHotel['hotelUid'],'startDate':reservation.json()['startDate'],'endDate':reservation.json()['endDate'],'discount':userLoyalty['discount'],'status':reservation.json()['status'],'payment':payment.json()}
             return JsonResponse(data,status=status.HTTP_200_OK,safe=False,json_dumps_params={'ensure_ascii': False})
         except Exception as e:
