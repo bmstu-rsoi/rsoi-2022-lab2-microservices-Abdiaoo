@@ -35,20 +35,6 @@ jobs:
           WAIT_PORTS: 8080,8070,8060,8050,5432
       - name: containers
         run: docker ps
-      - name: inspect reservation
-        run: docker inspect reservationservice
-      - name: log reservation
-        run: docker container logs reservationservice
-      - name: inspect payment
-        run: docker inspect paymentservice
-      - name: log payment
-        run: docker container logs paymentservice
-      - name: inspect gateway
-        run: docker inspect gatewayservice
-      - name: log gateway
-        run: docker container logs gatewayservice
-      - name: postgres
-        run: docker inspect postgres
       - name: Run API Tests
         uses: matt-ball/newman-action@master
         with:
