@@ -47,6 +47,8 @@ jobs:
         run: docker inspect gatewayservice
       - name: log gateway
         run: docker container logs gatewayservice
+      - name: postgres
+        run: docker inspect postgres
       - name: Run API Tests
         uses: matt-ball/newman-action@master
         with:
