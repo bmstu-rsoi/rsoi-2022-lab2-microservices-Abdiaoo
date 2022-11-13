@@ -9,7 +9,7 @@ from pytz import timezone
 class ReservationViewSet(viewsets.ViewSet):
     def __init__(self):
         if Hotel.objects.count()==0:
-            hotel=Hotel(hotel_uid="049161bb-badd-4fa8-9d90-87c9a82b0668",name="Ararat Park Hyatt Moscow",country="Россия",city="Москва",address="Неглинная ул., 4",stars=5,price=10000)
+            hotel=Hotel(hotelUid="049161bb-badd-4fa8-9d90-87c9a82b0668",name="Ararat Park Hyatt Moscow",country="Россия",city="Москва",address="Неглинная ул., 4",stars=5,price=10000)
             hotel.save()        
     def Hotels(self,request):
         try:

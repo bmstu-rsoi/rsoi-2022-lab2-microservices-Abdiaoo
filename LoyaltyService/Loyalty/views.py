@@ -9,7 +9,7 @@ from django.core import serializers
 class LoyaltyViewSet(viewsets.ViewSet):
     def __init__(self):
         if UserLoyalty.objects.count()==0:
-            user=UserLoyalty(username="Test Max",reservation_count=25,status="GOLD",discount=10)
+            user=UserLoyalty(username="Test Max",reservationCount=25,status="GOLD",discount=10)
             user.save()
 
     def Loyalties(self,request):

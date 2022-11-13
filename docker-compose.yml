@@ -13,9 +13,31 @@ services:
       - ./postgres/:/docker-entrypoint-initdb.d/
     ports:
       - "5432:5432"
+  gatewayservice:
+    container_name: gatewayservice
+    image: gatewayservice
+    build:
+      context: ./Gatewayservice
+    restart: always
+    ports:
+      - 8080:8080
+    volumes:
+      - .:/app/Gatewayservice
+  paymentservice:
+    container_name: paymentservice
+    image: paymentservice
+    build:
+      context: ./PaymentService
+    restart: always
+    ports:
+      - 8060:8060
+    volumes:
+      - .:/app/PaymentService
   loyaltyservice:
     container_name: loyaltyservice
     image: loyaltyservice
+    build:
+      context: ./LoyaltyService
     restart: always
     ports:
       - 8050:8050
@@ -24,26 +46,12 @@ services:
   reservationservice:
     container_name: reservationservice
     image: reservationservice
+    build:
+      context: ./ReservationService
     restart: always
     ports:
       - 8070:8070
     volumes:
       - .:/app/ReservationService
-  paymentservice:
-    container_name: paymentservice
-    image: paymentservice
-    restart: always
-    ports:
-      - 8060:8060
-    volumes:
-      - .:/app/PaymentService
-  gatewayservice:
-    container_name: gatewayservice
-    image: gatewayservice
-    restart: always
-    ports:
-      - 8080:8080
-    volumes:
-      - .:/app/Gatewayservice
 volumes:
   db-data:

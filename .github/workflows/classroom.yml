@@ -2,10 +2,10 @@ name: GitHub Classroom Workflow
 on:
   push:
     branches:
-      - develop
+      - master
   pull_request:
     branches:
-      - develop
+      - master
 jobs:
   build:
     name: Autograding
@@ -17,10 +17,7 @@ jobs:
 
       - uses: docker/setup-buildx-action@v2
 
-      - name: Build docker containers
-        run: |
-          chmod +x build_d.sh
-          ./build_d.sh
+      # TODO build and run unit tests
 
       - name: Build images
         timeout-minutes: 10
@@ -33,15 +30,16 @@ jobs:
           ./scripts/wait-script.sh
         env:
           WAIT_PORTS: 8080,8070,8060,8050,5432
-      - name: containers
-        run: docker ps
+
       - name: Run API Tests
         uses: matt-ball/newman-action@master
         with:
-          collection: v2/postman/collection.json
-          environment: v2/postman/environment.json
+          # TODO insert your variant
+          collection: <variant>/postman/collection.json
+          environment: <variant>/postman/environment.json
           delayRequest: 100
           reporters: '[ "cli" ]'
+
       - uses: education/autograding@v1
         id: autograder
         continue-on-error: true
