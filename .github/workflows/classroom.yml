@@ -26,12 +26,10 @@ jobs:
       - name: Run containers
         timeout-minutes: 5
         run: |
-          docker compose up -d
+          docker compose up
           ./scripts/wait-script.sh
         env:
           WAIT_PORTS: 8080,8070,8060,8050,5432
-      - name: logs reservation
-        run: docker logs reservationservice
       - name: Run API Tests
         uses: matt-ball/newman-action@master
         with:
