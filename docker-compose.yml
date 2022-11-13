@@ -23,6 +23,8 @@ services:
       - 8080:8080
     volumes:
       - .:/app/Gatewayservice
+    depends_on:
+      - postgres
   paymentservice:
     container_name: paymentservice
     image: paymentservice
@@ -33,6 +35,8 @@ services:
       - 8060:8060
     volumes:
       - .:/app/PaymentService
+    depends_on:
+      - postgres
   loyaltyservice:
     container_name: loyaltyservice
     image: loyaltyservice
@@ -43,6 +47,8 @@ services:
       - 8050:8050
     volumes:
       - .:/app/LoyaltyService
+    depends_on:
+      - postgres
   reservationservice:
     container_name: reservationservice
     image: reservationservice
@@ -53,5 +59,7 @@ services:
       - 8070:8070
     volumes:
       - .:/app/ReservationService
+    depends_on:
+      - postgres
 volumes:
   db-data:
