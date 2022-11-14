@@ -27,17 +27,15 @@ jobs:
         timeout-minutes: 5
         run: |
           docker compose up -d
+          docker logs reservationservice
+          docker logs paymentservice
+          docker logs gatewayservice
+          docker logs loyaltyservice
           ./scripts/wait-script.sh
         env:
           WAIT_PORTS: 8080,8070,8060,8050,5432
       - name: containers
         run: docker ps
-      - name: reservation logs
-        run: docker logs reservationservice
-      - name: payment logs
-        run: docker logs paymentservice
-      - name: gateway logs
-        run: docker logs gatewayservice
       - name: Run API Tests
         uses: matt-ball/newman-action@master
         with:
