@@ -25,6 +25,9 @@ services:
       - .:/app/Gatewayservice
     depends_on:
       - postgres-dbs
+      - paymentservice
+      - loyaltyservice
+      - reservationservice
   paymentservice:
     container_name: paymentservice
     image: paymentservice
