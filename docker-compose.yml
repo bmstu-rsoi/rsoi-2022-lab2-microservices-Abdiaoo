@@ -13,6 +13,7 @@ services:
       - ./postgres/:/docker-entrypoint-initdb.d/
     ports:
       - "5432:5432"
+    network_mode: bridge
   gatewayservice:
     container_name: gatewayservice
     image: gatewayservice
@@ -28,6 +29,7 @@ services:
       - paymentservice
       - loyaltyservice
       - reservationservice
+    network_mode: bridge
   paymentservice:
     container_name: paymentservice
     image: paymentservice
@@ -40,6 +42,7 @@ services:
       - .:/app/PaymentService
     depends_on:
       - postgres
+    network_mode: bridge
   loyaltyservice:
     container_name: loyaltyservice
     image: loyaltyservice
@@ -52,6 +55,7 @@ services:
       - .:/app/LoyaltyService
     depends_on:
       - postgres
+    network_mode: bridge
   reservationservice:
     container_name: reservationservice
     image: reservationservice
@@ -64,5 +68,6 @@ services:
       - .:/app/ReservationService
     depends_on:
       - postgres
+    network_mode: bridge
 volumes:
   db-data:
