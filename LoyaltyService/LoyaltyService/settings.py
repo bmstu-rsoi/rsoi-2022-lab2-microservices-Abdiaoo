@@ -81,7 +81,7 @@ DATABASES = {
         'NAME': 'loyalties',
         'USER':'program',
         'PASSWORD':'test',
-        'HOST':'postgres',
+        'HOST':'postgres-dbs',
         'PORT': 5432
     }
 }
