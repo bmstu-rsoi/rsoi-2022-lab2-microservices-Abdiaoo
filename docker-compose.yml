@@ -13,13 +13,12 @@ services:
       - ./postgres/:/docker-entrypoint-initdb.d/
     ports:
       - "5432:5432"
-    network_mode: bridge
   gatewayservice:
     container_name: gatewayservice
     image: gatewayservice
     build:
       context: ./Gatewayservice
-    restart: on-failure
+    restart: always
     ports:
       - "8080:8080"
     volumes:
@@ -29,45 +28,41 @@ services:
       - paymentservice
       - loyaltyservice
       - reservationservice
-    network_mode: bridge
   paymentservice:
     container_name: paymentservice
     image: paymentservice
     build:
       context: ./PaymentService
-    restart: on-failure
+    restart: always
     ports:
       - "8060:8060"
     volumes:
       - .:/app/PaymentService
     depends_on:
       - postgres-dbs
-    network_mode: bridge
   loyaltyservice:
     container_name: loyaltyservice
     image: loyaltyservice
     build:
       context: ./LoyaltyService
-    restart: on-failure
+    restart: always
     ports:
       - "8050:8050"
     volumes:
       - .:/app/LoyaltyService
     depends_on:
       - postgres-dbs
-    network_mode: bridge
   reservationservice:
     container_name: reservationservice
     image: reservationservice
     build:
       context: ./ReservationService
-    restart: on-failure
+    restart: always
     ports:
       - "8070:8070"
     volumes:
       - .:/app/ReservationService
     depends_on:
       - postgres-dbs
-    network_mode: bridge
 volumes:
   db-data:
