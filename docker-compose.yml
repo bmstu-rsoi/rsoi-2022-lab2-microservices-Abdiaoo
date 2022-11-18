@@ -1,6 +1,6 @@
 version: "3"
 services:
-  postgres:
+  postgres-dbs:
     image: library/postgres:13
     container_name: postgres
     restart: on-failure
@@ -25,7 +25,7 @@ services:
     volumes:
       - .:/app/Gatewayservice
     depends_on:
-      - postgres
+      - postgres-dbs
       - paymentservice
       - loyaltyservice
       - reservationservice
@@ -41,7 +41,7 @@ services:
     volumes:
       - .:/app/PaymentService
     depends_on:
-      - postgres
+      - postgres-dbs
     network_mode: bridge
   loyaltyservice:
     container_name: loyaltyservice
@@ -54,7 +54,7 @@ services:
     volumes:
       - .:/app/LoyaltyService
     depends_on:
-      - postgres
+      - postgres-dbs
     network_mode: bridge
   reservationservice:
     container_name: reservationservice
@@ -67,7 +67,7 @@ services:
     volumes:
       - .:/app/ReservationService
     depends_on:
-      - postgres
+      - postgres-dbs
     network_mode: bridge
 volumes:
   db-data:
