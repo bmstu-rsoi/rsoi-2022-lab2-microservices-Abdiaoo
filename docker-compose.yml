@@ -1,8 +1,8 @@
 version: "3"
 services:
-  postgres-dbs:
+  postgres:
     image: library/postgres:13
-    container_name: postgres-dbs
+    container_name: postgres
     restart: on-failure
     environment:
       POSTGRES_USER: postgres
@@ -18,13 +18,13 @@ services:
     image: gatewayservice
     build:
       context: ./Gatewayservice
-    restart: always
+    restart: on-failure
     ports:
-      - 8080:8080
+      - "8080:8080"
     volumes:
       - .:/app/Gatewayservice
     depends_on:
-      - postgres-dbs
+      - postgres
       - paymentservice
       - loyaltyservice
       - reservationservice
@@ -33,36 +33,36 @@ services:
     image: paymentservice
     build:
       context: ./PaymentService
-    restart: always
+    restart: on-failure
     ports:
-      - 8060:8060
+      - "8060:8060"
     volumes:
       - .:/app/PaymentService
     depends_on:
-      - postgres-dbs
+      - postgres
   loyaltyservice:
     container_name: loyaltyservice
     image: loyaltyservice
     build:
       context: ./LoyaltyService
-    restart: always
+    restart: on-failure
     ports:
-      - 8050:8050
+      - "8050:8050"
     volumes:
       - .:/app/LoyaltyService
     depends_on:
-      - postgres-dbs
+      - postgres
   reservationservice:
     container_name: reservationservice
     image: reservationservice
     build:
       context: ./ReservationService
-    restart: always
+    restart: on-failure
     ports:
-      - 8070:8070
+      - "8070:8070"
     volumes:
       - .:/app/ReservationService
     depends_on:
-      - postgres-dbs
+      - postgres
 volumes:
   db-data:
