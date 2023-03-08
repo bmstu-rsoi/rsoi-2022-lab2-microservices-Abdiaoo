@@ -4,7 +4,7 @@ from .views import LoyaltyViewSet
 
 urlpatterns=[
     path('loyalty',LoyaltyViewSet.as_view({
-        'get':'Loyalties'
+        'get':'userLoyalties'
     })),
     path('loyalty/<str:pk>',LoyaltyViewSet.as_view({
         'patch':'update',

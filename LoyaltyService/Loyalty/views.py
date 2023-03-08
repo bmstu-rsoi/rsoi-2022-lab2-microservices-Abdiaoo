@@ -11,15 +11,18 @@ class LoyaltyViewSet(viewsets.ViewSet):
         if UserLoyalty.objects.count()==0:
             user=UserLoyalty(username="Test Max",reservationCount=25,status="GOLD",discount=10)
             user.save()
-
-    def Loyalties(self,request):
+    def userLoyalties(self,request):
+        username=request.headers['X-User-Name']
+        if not username:
+            return JsonResponse({'message': 'Nom d utilisateur manquant dans les en-têtes de requete'}, status=status.HTTP_400_BAD_REQUEST)
         try:
-            loyalties=UserLoyalty.objects.all()
-            serializer=UserLoyaltySerializer(loyalties,many=True)
-            return JsonResponse(serializer.data,status=status.HTTP_200_OK,safe=False,json_dumps_params={'ensure_ascii': False})
+            user_loyalty = UserLoyalty.objects.get(username=username)
+            serializer = UserLoyaltySerializer(user_loyalty)
+            return JsonResponse(serializer.data, status=status.HTTP_200_OK)
+        except UserLoyalty.DoesNotExist:
+            return JsonResponse({'message': 'Aucune fidélité trouvée pour cet utilisateur'}, status=status.HTTP_404_NOT_FOUND)
         except Exception as e:
             return JsonResponse({'message': '{}'.format(e)}, status=status.HTTP_400_BAD_REQUEST)
-    
     def DecrementLoyalty(self,request,pk=None):
         try:
             userloyalty=UserLoyalty.objects.get(id=pk)

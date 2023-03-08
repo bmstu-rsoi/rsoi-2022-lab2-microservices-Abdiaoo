@@ -17,7 +17,14 @@ class ReservationViewSet(viewsets.ViewSet):
             serializer=HotelSerializer(hotels,many=True)
             return JsonResponse(serializer.data,status=status.HTTP_200_OK,safe=False,json_dumps_params={'ensure_ascii': False})
         except Exception as e:
-            return JsonResponse({'message': '{}'.format(e)}, status=status.HTTP_400_BAD_REQUEST)  
+            return JsonResponse({'message': '{}'.format(e)}, status=status.HTTP_400_BAD_REQUEST)
+    def hotelByUuid(self,request,hotelUid):
+        try:
+            hotel=Hotel.objects.get(hotelUid=hotelUid)
+            serializer=HotelSerializer(hotel)
+            return JsonResponse(serializer.data,status=status.HTTP_200_OK)
+        except Exception as e:
+            return JsonResponse({'message':'{}'.format(e)},status=status.HTTP_400_BAD_REQUEST)
     def aHotel(self,request,pk=None):
         try:       
             reservation=Hotel.objects.get(id=pk)

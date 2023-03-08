@@ -18,6 +18,6 @@ urlpatterns=[
         'get':'GetInfoUser'
     })),
     path('loyalty',GatewayViewSet.as_view({
-        'get':'list_loyalty'
+        'get':'userLoyalties'
     })),
 ]

@@ -14,7 +14,10 @@ urlpatterns=[
     path('hotels',ReservationViewSet.as_view({
         'get':'Hotels'
     })),
-     path('hotels/<str:pk>',ReservationViewSet.as_view({
+    path('hotels/<str:pk>',ReservationViewSet.as_view({
         'get':'aHotel'
+    })),
+    path('hotel/<str:hotelUid>',ReservationViewSet.as_view({
+        'get':'hotelByUuid'
     })),
 ]
